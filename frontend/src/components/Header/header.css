@@ -1,0 +1,38 @@
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-name {
+    margin: 0;
+}
+
+.search-bar input {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 300%;
+    position:relative;
+    left: -140%;
+}
+
+.login-text {
+    margin: 0;
+}
+
+.login-button{
+    margin: 10px
+}
+
+.register-button{
+    margin: 10px
+}
+
+.login-buttons-container{
+    display: flex;
+    flex-direction: row;
+}

@@ -1,0 +1,57 @@
+/* src/components/Register.css */
+
+.register-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 50px;
+    background-color: #f9f9f9;
+  }
+  
+  .register-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .register-form label {
+    font-weight: bold;
+  }
+  
+  .register-form input[type="text"],
+  .register-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .register-form button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .password-checks {
+    margin-top: 5px;
+  }
+  
+  .valid {
+    color: green;
+  }
+  
+  .invalid {
+    color: red;
+  }
+  .password-input {
+    position: relative;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }

@@ -1,0 +1,14 @@
+/* src/components/ProductList.css */
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px; /* Adjust margin-top as needed */
+  }
+  
+  .product {
+    flex: 0 0 30%; /* Set each product to occupy 30% of the container width */
+    margin: 10px; /* Adjust margin between products as needed */
+  }
+  

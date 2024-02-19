@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Header from '../Header';
-import ProductList from '../ProductList';
+import React, { useState } from "react";
+import Header from "../Header";
+import ProductList from "../ProductList";
 
 const Homepage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -11,7 +11,7 @@ const Homepage = () => {
 
   return (
     <div className="container-fluid">
-      <Header handleSearch={handleSearch} />
+      <Header handleSearch={handleSearch} hasSearchBar={true} />
       <ProductList filter={searchTerm} />
     </div>
   );

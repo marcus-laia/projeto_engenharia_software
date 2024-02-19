@@ -1,0 +1,56 @@
+.addCards-container {
+  max-width: 800px;
+  padding: 20px;
+}
+
+.product-image-addCards {
+  width: 80px; 
+  height: 80px;
+  margin-right: 10px;
+  transition: width 0.3s, height 0.3s; 
+}
+
+.product-image-addCards:hover {
+  width: 220px;
+  height: 309px;
+}
+
+.product-list-addCards {
+  display: unset;
+  margin-top: 20px;
+}
+
+.product-row-addCards {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc; 
+  padding-bottom: 10px;
+}
+
+.product-details-addCards {
+  display: flex;
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  position: absolute;
+  left: 740px;
+}
+
+.notification-add-cards {
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.notification-add-cards.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.notification-add-cards.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}

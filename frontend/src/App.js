@@ -3,6 +3,8 @@ import Homepage from './components/Homepage';
 import Login from './components/Login';
 import Register from './components/Register';
 import AddCardsPage from './components/AddCardsPage';
+import ChatPage from './components/ChatPage';
+import AllChatsPage from './components/AllChatsPage';
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/add-cards-page" element={<AddCardsPage />} />
+        <Route path="/chat-page/:otherUserId" element={<ChatPage />} />
+        <Route path="/all-chats" element={<AllChatsPage />} />
       </Routes>
     </Router>
   );

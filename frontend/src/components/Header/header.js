@@ -33,6 +33,11 @@ const Header = ({ handleSearch = () => {}, hasSearchBar = false }) => {
             Add cards
           </Link>
         </div>
+        <div className="all-chats-button">
+          <Link to="/all-chats" className="btn btn-outline-light">
+            All chats
+          </Link>
+        </div>
       </div>
     </header>
   );

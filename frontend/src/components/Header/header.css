@@ -37,6 +37,13 @@
     margin: 10px
 }
 
+.all-chats-button{
+    margin: 10px
+}
+.add-cards-button{
+    margin: 10px
+}
+
 .login-buttons-container{
     display: flex;
     flex-direction: row;

@@ -1,0 +1,29 @@
+.all-chats-container-all-chats {
+    padding: 20px;
+  }
+  
+  .chats-list-all-chats {
+    margin-top: 20px;
+  }
+  
+  .chat-row-all-chats {
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .user-name-all-chats {
+    font-weight: bold;
+  }
+  
+  .last-message-all-chats {
+    color: #666;
+  }
+  

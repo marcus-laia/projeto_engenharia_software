@@ -1,0 +1,59 @@
+.my-account-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .user-info-myAccount {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .info-item-myAccount {
+    margin-bottom: 10px;
+  }
+  
+  .label-title-myAccount {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .change-location-btn-myAccount {
+    margin-left: 10px;
+    margin-top: 15px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .change-location-btn-myAccount:hover {
+    background-color: #0056b3;
+  }
+
+  .location-details-myAccount{
+    margin-left: 30px;
+  }
+
+.success-message-myAccount {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .error-message-myAccount {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  

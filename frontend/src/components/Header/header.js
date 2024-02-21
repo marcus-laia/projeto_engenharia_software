@@ -37,6 +37,11 @@ const Header = ({ handleSearch = () => {}, hasSearchBar = false }) => {
           <Link to="/all-chats" className="btn btn-outline-light">
             All chats
           </Link>
+          <div className="my-account-button">
+            <Link to="/my-account" className="btn btn-outline-light">
+              My account
+            </Link>
+          </div>
         </div>
       </div>
     </header>

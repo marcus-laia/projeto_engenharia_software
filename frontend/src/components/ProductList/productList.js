@@ -1,7 +1,7 @@
 import React from "react";
 import Product from "./product";
 import { useQuery } from "@apollo/client";
-import { GET_PRODUCTS } from "../../graphql/mutations/getProductsMutation";
+import { GET_PRODUCTS } from "../../graphql/mutations/getProductsQuery";
 import "./productList.css";
 
 const ProductList = ({ filter }) => {

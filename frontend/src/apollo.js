@@ -2,12 +2,14 @@ import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { MockLink } from '@apollo/client/testing';
 import { LOGIN_MUTATION } from './graphql/mutations/loginMutation';
 import { REGISTER_MUTATION } from './graphql/mutations/registerMutation';
-import { GET_PRODUCTS } from './graphql/mutations/getProductsMutation';
+import { GET_PRODUCTS } from './graphql/mutations/getProductsQuery';
 import { GET_MASTER_PRODUCTS } from './graphql/mutations/getMasterProductsMutation';
 import { ADD_CARDS } from './graphql/mutations/addCardsMutation';
 import { GET_CHAT } from './graphql/mutations/getChatMutation';
 import { GET_ALL_CHATS } from './graphql/mutations/getAllChatsMutation';
 import { SEND_MESSAGE_MUTATION } from './graphql/mutations/sendMessageMutation';
+import { GET_USER_INFO } from './graphql/mutations/getUserInfoQuery';
+import { UPDATE_USER_LOCATION } from './graphql/mutations/updateUserLocationMutation';
 import productImg1 from './custom-magic-the-gathering-cards-1.png';
 import productImg2 from './custom-magic-the-gathering-cards-2.jpg';
 import productImg3 from './custom-magic-the-gathering-cards-3.png';
@@ -200,6 +202,26 @@ const mockLink = new MockLink([
     },
     {
       request: {
+        query: GET_USER_INFO
+      },
+      result: {
+        data: {
+          userInfo: {
+            username: 'testusername',
+            email: 'test@email.com',
+            id: 123,
+            location: {
+              country: 'Brasil',
+              state: 'São Paulo',
+              city: 'Santo André',
+              postalCode: '11111-00'
+            }
+          }
+        }
+      }
+    },
+    {
+      request: {
         query: GET_ALL_CHATS,
         variables: {
           currentUserId: 123
@@ -222,6 +244,24 @@ const mockLink = new MockLink([
       },
       result: {
         status: 'success'
+      }
+    },
+    {
+      request: {
+        query: UPDATE_USER_LOCATION,
+        variables: {
+          userId: 123,
+          location: {
+            country: 'Brasil',
+            state: 'São Paulo',
+            city: 'São Caetano',
+            postalCode: '12345-67'
+          }
+        }
+      },
+      result: {
+        success: true,
+        message: 'Location changed successfully!'
       }
     }
 ]);

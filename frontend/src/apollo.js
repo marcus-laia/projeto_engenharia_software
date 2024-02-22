@@ -1,4 +1,5 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+// import { setContext } from '@apollo/client/link/context';
 import { MockLink } from '@apollo/client/testing';
 import { LOGIN_MUTATION } from './graphql/mutations/loginMutation';
 import { REGISTER_MUTATION } from './graphql/mutations/registerMutation';
@@ -13,6 +14,8 @@ import { UPDATE_USER_LOCATION } from './graphql/mutations/updateUserLocationMuta
 import productImg1 from './custom-magic-the-gathering-cards-1.png';
 import productImg2 from './custom-magic-the-gathering-cards-2.jpg';
 import productImg3 from './custom-magic-the-gathering-cards-3.png';
+import { REMOVE_CARDS } from './graphql/mutations/removeCardsMutation';
+import { GET_USER_PRODUCTS } from './graphql/mutations/getUserProductsQuery';
 
 var products = [];
 var products_master = [];
@@ -72,7 +75,15 @@ const mockLink = new MockLink([
         data: {
           login: {
             success: true,
-            token: 'your_mocked_token'
+            token: 'your_mocked_token',
+            userId: 123, 
+            username: 'Test',
+            location: {
+              country: 'Brasil',
+              state: 'São Paulo',
+              city: 'Santo André',
+              postalCode: '11111-00'
+            }
           }
         }
       }
@@ -177,12 +188,26 @@ const mockLink = new MockLink([
         query: ADD_CARDS,
         variables: {
           productIds: [0,1,2],
-          userId: 'testUserId'
+          userId: 123
         }
       },
       result: {
         success: true,
         message: 'Added products successfully',
+        userProductsList: products.slice(0, 2)
+      }
+    },
+    {
+      request: {
+        query: REMOVE_CARDS,
+        variables: {
+          productIds: [0,1,2],
+          userId: 123
+        }
+      },
+      result: {
+        success: true,
+        message: 'Removed products successfully',
         userProductsList: products.slice(0, 2)
       }
     },
@@ -197,6 +222,20 @@ const mockLink = new MockLink([
       result: {
         data: {
           messages: messages
+        }
+      }
+    },
+    {
+      request: {
+        query: GET_USER_PRODUCTS,
+        variables: {
+          userId: 123,
+          filter: ''
+        }
+      },
+      result: {
+        data: {
+          products: products.slice(0, 5)
         }
       }
     },
@@ -271,5 +310,26 @@ const client = new ApolloClient({
   link: mockLink.concat(createHttpLink({ uri: '/graphql' })),
   cache: new InMemoryCache()
 });
+
+// TO DO: adjust this when backend is up
+// const authLink = setContext((_, { headers }) => {
+//   // Retrieve the JWT from local storage or cookies
+//   const token = localStorage.getItem('customer_token'); // Example: localStorage key 'jwt'
+
+//   return {
+//     headers: {
+//       ...headers,
+//       authorization: token ? `Bearer ${token}` : '', // Include the JWT in the authorization header
+//     }
+//   };
+// });
+// const httpLink = createHttpLink({
+//   uri: 'http://localhost:4000/graphql', // Our GraphQL server URL
+// });
+
+// const client = new ApolloClient({
+//   link: authLink.concat(httpLink),
+//   cache: new InMemoryCache()
+// });
 
 export default client;

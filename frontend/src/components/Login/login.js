@@ -12,13 +12,21 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [login, { loading }] = useMutation(LOGIN_MUTATION, {
-    onCompleted: (data) => {
-      // Handle successful login
-      localStorage.setItem("token", data.login.token);
-      navigate("/");
+    onCompleted: async (data) => {
+      try {
+        localStorage.setItem("customer_token", data.login.token);
+        localStorage.setItem("userId", data.login.userId);
+        localStorage.setItem("userUsername", data.login.username);
+        localStorage.setItem("userEmail", data.login.email);
+        localStorage.setItem("userLocation", data.login.location);
+        navigate("/");
+      } catch (error) {
+        console.error("Login error:", error);
+        setErrorMessage(error.message);
+      }
     },
     onError: (error) => {
-      // Handle login error
+      console.error("Login error:", error);
       setErrorMessage(error.message);
     },
   });

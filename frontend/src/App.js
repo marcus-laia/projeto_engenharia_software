@@ -6,6 +6,7 @@ import AddCardsPage from './components/AddCardsPage';
 import ChatPage from './components/ChatPage';
 import AllChatsPage from './components/AllChatsPage';
 import MyAccount from './components/MyAccount/myAccount';
+import MyCardsPage from './components/MyCardsPage/myCardsPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/chat-page/:otherUserId" element={<ChatPage />} />
         <Route path="/all-chats" element={<AllChatsPage />} />
         <Route path="/my-account" element={<MyAccount />} />
+        <Route path="/my-cards" element={<MyCardsPage />} />
       </Routes>
     </Router>
   );

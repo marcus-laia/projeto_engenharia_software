@@ -5,6 +5,15 @@ export const LOGIN_MUTATION = gql`
     login(username: $username, password: $password) {
       success
       token
+      userId
+      username
+      email
+      location {
+        country
+        state
+        city
+        postalCode
+      }
     }
   }
 `;

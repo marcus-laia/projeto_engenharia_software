@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { ADD_CARDS } from "../../graphql/mutations/addCardsMutation";
-import "./addCards.css";
+import { REMOVE_CARDS } from "../../graphql/mutations/removeCardsMutation";
+import "./myCards.css";
 
-const AddCards = ({ products }) => {
-  const [addCards] = useMutation(ADD_CARDS);
+const MyCards = ({ products }) => {
+  const [removeCards] = useMutation(REMOVE_CARDS);
   const [selectedProducts, setSelectedProducts] = useState(
     products.reduce((acc, product) => {
       acc[product.id] = false; // Set the initial selection status of each product to false
@@ -22,21 +22,21 @@ const AddCards = ({ products }) => {
     });
   };
 
-  const handleAddCards = async () => {
+  const handleRemoveCards = async () => {
     const selectedIds = Object.keys(selectedProducts)
       .filter((productId) => selectedProducts[productId])
       .map((productId) => parseInt(productId));
 
     try {
-      await addCards({
+      await removeCards({
         variables: {
           productIds: selectedIds,
           userId: 123 // TO DO: handle user id
         },
       });
-      setNotification({ message: 'Cards added successfully!', type: 'success' });
+      setNotification({ message: 'Cards removed successfully!', type: 'success' });
     } catch (error) {
-      setNotification({ message: 'Failed to add cards. Please try again.', type: 'error' });
+      setNotification({ message: 'Failed to remove cards. Please try again.', type: 'error' });
     } finally {
       setShowNotification(true);
       setTimeout(() => {
@@ -48,16 +48,17 @@ const AddCards = ({ products }) => {
   };
 
   return (
-    <div className="addCards-container">
-      <div className="product-list-addCards">
+    <div className="myCards-container">
+      <h1>My cards</h1>
+      <div className="product-list-myCards">
         {products.map((product) => (
-          <div key={product.id} className="product-row-addCards">
+          <div key={product.id} className="product-row-myCards">
             <img
               src={product.image}
               alt={product.name}
-              className="product-image-addCards"
+              className="product-image-myCards"
             />
-            <div className="product-details-addCards">
+            <div className="product-details-myCards">
               <label htmlFor={product.id}>{product.name}</label>
             </div>
               <input
@@ -70,7 +71,7 @@ const AddCards = ({ products }) => {
           </div>
         ))}
       </div>
-      <button className="add-cards-button-add-cards" onClick={handleAddCards}>Add my cards</button>
+      <button className="remove-cards-button" onClick={handleRemoveCards}>Remove selected cards</button>
       {showNotification && (
         <div className={`notification-add-cards ${notification.type}`}>
           {notification.message}
@@ -80,4 +81,4 @@ const AddCards = ({ products }) => {
   );
 };
 
-export default AddCards;
+export default MyCards;

@@ -11,7 +11,7 @@ const AddCardsPage = () => {
 
   return (
     <div>
-      <Header handleSearch={handleSearch} hasSearchBar={true} />
+      <Header handleSearch={handleSearch} hasSearchBar={true} placeholderText={"Search cards to add..."}/>
       <AddCardsContainer filter={searchTerm} />
     </div>
   );

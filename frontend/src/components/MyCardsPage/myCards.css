@@ -1,26 +1,26 @@
-.addCards-container {
+.myCards-container {
   max-width: 800px;
-  padding: 20px;
+  padding: 35px;
 }
 
-.product-image-addCards {
+.product-image-myCards {
   width: 80px; 
   height: 80px;
   margin-right: 10px;
   transition: width 0.3s, height 0.3s; 
 }
 
-.product-image-addCards:hover {
+.product-image-myCards:hover {
   width: 220px;
   height: 309px;
 }
 
-.product-list-addCards {
+.product-list-myCards {
   display: unset;
   margin-top: 20px;
 }
 
-.product-row-addCards {
+.product-row-myCards {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -29,7 +29,7 @@
   padding-bottom: 10px;
 }
 
-.product-details-addCards {
+.product-details-myCards {
   display: flex;
   align-items: center;
 }
@@ -55,7 +55,7 @@ input[type="checkbox"] {
   color: #721c24;
 }
 
-.add-cards-button-add-cards {
+.remove-cards-button {
   background-color: #007bff; 
   color: #fff; 
   border: none;
@@ -73,7 +73,7 @@ input[type="checkbox"] {
   height: 60px; 
 }
 
-.add-cards-button:hover {
+.remove-cards-button:hover {
   background-color: #0056b3;
 }
 

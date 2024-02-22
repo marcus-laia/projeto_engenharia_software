@@ -11,7 +11,11 @@ const Homepage = () => {
 
   return (
     <div className="container-fluid">
-      <Header handleSearch={handleSearch} hasSearchBar={true} />
+      <Header
+        handleSearch={handleSearch}
+        hasSearchBar={true}
+        placeholderText={"Search cards from other users..."}
+      />
       <ProductList filter={searchTerm} />
     </div>
   );

@@ -34,7 +34,10 @@ const typeDefs = gql`
     type Query {
         users: [User!]!
         user(id: ID!): User!
+        getProducts(filter: String): [Product]
+        getUserInfo(userId: ID!): User
+        getUserProducts(userId: ID!, filter: String): [Product]
     }
-`
+`;
 
 module.exports = { typeDefs }

@@ -7,6 +7,7 @@ import ChatPage from './components/ChatPage';
 import AllChatsPage from './components/AllChatsPage';
 import MyAccount from './components/MyAccount/myAccount';
 import MyCardsPage from './components/MyCardsPage/myCardsPage';
+import NegotiationPage from './components/NegotiationPage/negotiationPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/all-chats" element={<AllChatsPage />} />
         <Route path="/my-account" element={<MyAccount />} />
         <Route path="/my-cards" element={<MyCardsPage />} />
+        <Route path="/negotiation/:userId1/:userId2" element={<NegotiationPage />} />
       </Routes>
     </Router>
   );

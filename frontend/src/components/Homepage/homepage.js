@@ -14,7 +14,7 @@ const Homepage = () => {
       <Header
         handleSearch={handleSearch}
         hasSearchBar={true}
-        placeholderText={"Search cards from other users..."}
+        placeholderText={"Search..."}
       />
       <ProductList filter={searchTerm} />
     </div>

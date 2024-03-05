@@ -27,16 +27,19 @@ const Header = ({
   return (
     <header className="header">
       <h1 className="site-name" onClick={() => navigate("/")}>
-        Troca de cartas
+        TEPT
       </h1>
       {hasSearchBar && (
+        <div className="search-bar-container">
+
         <div className="search-bar">
           <input
             type="text"
             placeholder={placeholderText}
             onChange={handleChange}
-          />
+            />
         </div>
+            </div>
       )}
       <div className="login-buttons-container">
       {isLoggedIn ? (

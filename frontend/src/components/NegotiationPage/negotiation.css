@@ -1,0 +1,34 @@
+.product-screen-container-negotiation {
+    padding: 20px;
+}
+
+.product-row-negotiation {
+    margin-bottom: 20px;
+}
+
+.row-header-negotiation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.product-scroll-container-negotiation {
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.edit-button-negotiation {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 30px;
+}
+
+.edit-button-negotiation:hover {
+    background-color: #0056b3;
+}

@@ -7,7 +7,7 @@ const connection = connectToDatabase();
 
 // Create a dummy table
 const createUsersTableQuery = `
-    CREATE TABLE users (
+    CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
@@ -16,7 +16,7 @@ const createUsersTableQuery = `
 `;
 
 const createProductsTableQuery = `
-    CREATE TABLE products (
+    CREATE TABLE IF NOT EXISTS products (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         image VARCHAR(255) NOT NULL
@@ -24,7 +24,7 @@ const createProductsTableQuery = `
 `;
 
 const createCollectionsTableQuery = `
-    CREATE TABLE collections (
+    CREATE TABLE IF NOT EXISTS collections (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         user_id INT NOT NULL,

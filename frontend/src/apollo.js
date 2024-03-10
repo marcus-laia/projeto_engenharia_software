@@ -16,12 +16,13 @@ import productImg2 from './custom-magic-the-gathering-cards-2.jpg';
 import productImg3 from './custom-magic-the-gathering-cards-3.png';
 import { REMOVE_CARDS } from './graphql/mutations/removeCardsMutation';
 import { GET_USER_PRODUCTS } from './graphql/mutations/getUserProductsQuery';
-import { useState } from 'react';
+import { GET_NEGOTIATION } from './graphql/mutations/getNegotiationQuery';
+import { GET_NEGOTIATION_PRODUCTS } from './graphql/mutations/getNegotiationProductsQuery';
 
 var products = [];
 var products_master = [];
 
-var num_products = 15;
+var num_products = 30;
 var num_products_master = 10;
 
 for (var i = 0; i < num_products; i++) {
@@ -303,7 +304,49 @@ const mockLink = new MockLink([
         success: true,
         message: 'Location changed successfully!'
       }
-    }
+    },
+    {
+      request: {
+        query: GET_NEGOTIATION,
+        variables: {
+          userId1: 123,
+          userId2: 456
+        }
+      },
+      result: {
+        data: {
+          negotiationId: 999
+        }
+      }
+    },
+    {
+      request: {
+        query: GET_NEGOTIATION_PRODUCTS,
+        variables: {
+          negotiationId: 999,
+          userId: 123
+        }
+      },
+      result: {
+        data: {
+          products: products.slice(0, 10)
+        }
+      }
+    },
+    {
+      request: {
+        query: GET_NEGOTIATION_PRODUCTS,
+        variables: {
+          negotiationId: 999,
+          userId: 456
+        }
+      },
+      result: {
+        data: {
+          products: products.slice(2, 5)
+        }
+      }
+    },
 ]);
 
 

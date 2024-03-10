@@ -16,6 +16,7 @@ import productImg2 from './custom-magic-the-gathering-cards-2.jpg';
 import productImg3 from './custom-magic-the-gathering-cards-3.png';
 import { REMOVE_CARDS } from './graphql/mutations/removeCardsMutation';
 import { GET_USER_PRODUCTS } from './graphql/mutations/getUserProductsQuery';
+import { useState } from 'react';
 
 var products = [];
 var products_master = [];
@@ -306,30 +307,31 @@ const mockLink = new MockLink([
 ]);
 
 
-const client = new ApolloClient({
-  link: mockLink.concat(createHttpLink({ uri: '/graphql' })),
-  cache: new InMemoryCache()
-});
-
-// TO DO: adjust this when backend is up
-// const authLink = setContext((_, { headers }) => {
-//   // Retrieve the JWT from local storage or cookies
-//   const token = localStorage.getItem('customer_token'); // Example: localStorage key 'jwt'
-
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : '', // Include the JWT in the authorization header
-//     }
-//   };
-// });
-// const httpLink = createHttpLink({
-//   uri: 'http://localhost:4000/graphql', // Our GraphQL server URL
-// });
-
 // const client = new ApolloClient({
-//   link: authLink.concat(httpLink),
+//   link: mockLink.concat(createHttpLink({ uri: '/graphql' })),
 //   cache: new InMemoryCache()
 // });
+
+// TO DO: adjust this when backend is up
+
+let authLink = (_, { headers }) => {
+  // Retrieve the JWT from local storage or cookies
+  const token = localStorage.getItem('customer_token'); // Example: localStorage key 'jwt'
+
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '', // Include the JWT in the authorization header
+    }
+  };
+};
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000/graphql', // Our GraphQL server URL
+});
+
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache()
+});
 
 export default client;

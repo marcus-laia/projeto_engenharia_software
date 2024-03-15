@@ -1,0 +1,41 @@
+.chat-page-container-chatPage {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .see-negotiation-btn-chatPage {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .chat-and-negotiation-container-chatPage {
+    display: flex;
+    flex: 1;
+  }
+  
+  .chat-container-chatPage {
+    flex: 1;
+    overflow: auto;
+    transition: width 0.5s;
+  }
+  
+  .full-width-chatPage {
+    width: 100%;
+  }
+  
+  .negotiation-container-chatPage {
+    width: 0;
+    overflow: hidden;
+    transition: width 0.5s;
+  }
+  
+  .expanded-chatPage {
+    width: 50%;
+  }
+  

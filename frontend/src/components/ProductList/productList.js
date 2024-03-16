@@ -14,9 +14,9 @@ const ProductList = ({ filter }) => {
 
   return (
     <div className="product-list">
-      {data.getProducts.map((product) => (
+      {data.products.map((product) => (
         <Product
-          key={product.id}
+          id={product.id}
           name={product.name}
           image={product.image}
           sku={product.sku}

@@ -18,6 +18,7 @@ import { REMOVE_CARDS } from './graphql/mutations/removeCardsMutation';
 import { GET_USER_PRODUCTS } from './graphql/mutations/getUserProductsQuery';
 import { GET_NEGOTIATION } from './graphql/mutations/getNegotiationQuery';
 import { GET_NEGOTIATION_PRODUCTS } from './graphql/mutations/getNegotiationProductsQuery';
+import { GET_PRODUCT_DETAILS } from './graphql/mutations/getProductDetailsQuery';
 
 var products = [];
 var products_master = [];
@@ -142,7 +143,7 @@ const mockLink = new MockLink([
       },
       result: {
         data: {
-          products: products_master
+          getProducts: products_master
         }
       }
     },
@@ -347,34 +348,97 @@ const mockLink = new MockLink([
         }
       }
     },
+    {
+      request: {
+        query: GET_PRODUCT_DETAILS,
+        variables: {
+          productId: 0
+        }
+      },
+      result: {
+        data: {
+          getProduct: {
+            id: products[0].id,
+            name: products[0].name,
+            image: products[0].image,
+            sku: products[0].sku,
+            collection: 'special-collection-2024',
+            text_description: 'this is the text of the card!',
+            owner_id: 456
+          }
+        }
+      }
+    },
+    {
+      request: {
+        query: GET_PRODUCT_DETAILS,
+        variables: {
+          productId: 1
+        }
+      },
+      result: {
+        data: {
+          getProduct: {
+            id: products[1].id,
+            name: products[1].name,
+            image: products[1].image,
+            sku: products[1].sku,
+            collection: 'special-collection-2024',
+            text_description: 'this is the text of the card!',
+            owner_id: 456
+          }
+        }
+      }
+    },
+    {
+      request: {
+        query: GET_PRODUCT_DETAILS,
+        variables: {
+          productId: 2
+        }
+      },
+      result: {
+        data: {
+          getProduct: {
+            id: products[2].id,
+            name: products[2].name,
+            image: products[2].image,
+            sku: products[2].sku,
+            collection: 'special-collection-2024',
+            text_description: 'this is the text of the card!',
+            owner_id: 456
+          }
+        }
+      }
+    },
 ]);
 
 
-// const client = new ApolloClient({
-//   link: mockLink.concat(createHttpLink({ uri: '/graphql' })),
-//   cache: new InMemoryCache()
-// });
+const client = new ApolloClient({
+  link: mockLink.concat(createHttpLink({ uri: '/graphql' })),
+  cache: new InMemoryCache()
+});
 
 // TO DO: adjust this when backend is up
 
-let authLink = (_, { headers }) => {
-  // Retrieve the JWT from local storage or cookies
-  const token = localStorage.getItem('customer_token'); // Example: localStorage key 'jwt'
+// let authLink = (_, { headers }) => {
+//   // Retrieve the JWT from local storage or cookies
+//   const token = localStorage.getItem('customer_token'); // Example: localStorage key 'jwt'
 
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '', // Include the JWT in the authorization header
-    }
-  };
-};
-const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql', // Our GraphQL server URL
-});
+//   return {
+//     headers: {
+//       ...headers,
+//       authorization: token ? `Bearer ${token}` : '', // Include the JWT in the authorization header
+//     }
+//   };
+// };
+// const httpLink = createHttpLink({
+//   uri: 'http://localhost:4000/graphql', // Our GraphQL server URL
+// });
 
-const client = new ApolloClient({
-  link: httpLink,
-  cache: new InMemoryCache()
-});
+// const client = new ApolloClient({
+//   link: httpLink,
+//   cache: new InMemoryCache()
+// });
 
 export default client;

@@ -25,18 +25,18 @@ const Chat = ({ messages, currentUserId, otherUserId }) => {
   };
 
   return (
-    <div className="chat-container-chatPage">
-      <div className="messages-container-chatPage">
+    <div className="chat-container-chat">
+      <div className="messages-container-chat">
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`message-chatPage ${message.from === currentUserId ? 'sender-chatPage' : 'receiver-chatPage'}`}
+            className={`message-chat ${message.from === currentUserId ? 'sender-chat' : 'receiver-chat'}`}
           >
             <p>{message.content}</p>
           </div>
         ))}
       </div>
-      <div className="text-input-chatPage">
+      <div className="text-input-chat">
         <input
           type="text"
           placeholder="Type a message..."

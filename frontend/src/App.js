@@ -8,6 +8,7 @@ import AllChatsPage from './components/AllChatsPage';
 import MyAccount from './components/MyAccount/myAccount';
 import MyCardsPage from './components/MyCardsPage/myCardsPage';
 import NegotiationPage from './components/NegotiationPage/negotiationPage';
+import ProductDetailsPage from './components/ProductDetailsPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/my-account" element={<MyAccount />} />
         <Route path="/my-cards" element={<MyCardsPage />} />
         <Route path="/negotiation/:userId1/:userId2" element={<NegotiationPage />} />
+        <Route path="/product-details/:productId" element={<ProductDetailsPage />} />
       </Routes>
     </Router>
   );

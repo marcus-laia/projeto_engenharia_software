@@ -25,7 +25,7 @@ const Header = ({
   };
 
   return (
-    <header className="header">
+    <header className="header" style={{ backgroundColor: "#4B0066" }}>
       <h1 className="site-name" onClick={() => navigate("/")}>
         TEPT
       </h1>

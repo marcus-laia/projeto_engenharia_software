@@ -61,6 +61,7 @@ const Register = () => {
   return (
     <div>
       <Header hasSearchBar={false} />
+      <div className="background-register-container"></div>
       <div className="register-container">
         <h2>Register</h2>
         {errorMessage && (

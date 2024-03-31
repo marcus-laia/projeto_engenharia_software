@@ -1,3 +1,5 @@
+// login.js
+
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_MUTATION } from "../../graphql/mutations/loginMutation";
@@ -44,6 +46,7 @@ const Login = () => {
   return (
     <div>
       <Header hasSearchBar={false} />
+      <div className="background-container"></div>
       <div className="login-container">
         <h2>Login</h2>
         {errorMessage && (

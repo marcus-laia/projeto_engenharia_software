@@ -1,21 +1,38 @@
 /* src/components/Register.css */
 
+.background-register-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url('register-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: Macondo Swash Caps;
+}
+
 .register-container {
     max-width: 400px;
     margin: auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-top: 50px;
-    background-color: #f9f9f9;
+    margin-top: 20px;
+    background-color: #EFEFE6;
+    font-family: Macondo Swash Caps;
   }
   
   .register-form .form-group {
     margin-bottom: 20px;
+    font-family: Macondo Swash Caps;
   }
   
   .register-form label {
     font-weight: bold;
+    font-family: Macondo Swash Caps;
   }
   
   .register-form input[type="text"],
@@ -23,16 +40,25 @@
     width: 100%;
     padding: 10px;
     font-size: 16px;
+    font-family: Macondo Swash Caps;
   }
   
   .register-form button {
     width: 100%;
     padding: 10px;
     font-size: 16px;
+    background-color: #4B0066; 
+    font-family: Macondo Swash Caps;
   }
 
+  .register-form button:disabled {
+    opacity: 0.5; 
+    cursor: not-allowed;
+    background-color: #4B0066;
+  }
   .password-checks {
     margin-top: 5px;
+    font-family: Macondo Swash Caps;
   }
   
   .valid {
@@ -54,4 +80,5 @@
     background: none;
     border: none;
     cursor: pointer;
+    font-family: Macondo Swash Caps;
   }

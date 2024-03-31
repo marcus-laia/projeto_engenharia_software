@@ -1,36 +1,17 @@
 /* src/components/Login.css */
 
-.login-container {
-  max-width: 400px;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 50px;
-  background-color: #f9f9f9;
-}
-
-.login-form .form-group {
-  margin-bottom: 20px;
-}
-
-.login-form label {
-  font-weight: bold;
-}
-
-.login-form input[type="text"],
-.login-form input[type="password"] {
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
+  height: 100%;
+  z-index: -1;
+  background-image: url('login-background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-
-.login-form button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-}
-/* src/components/Login.css */
 
 .login-container {
   max-width: 400px;
@@ -39,15 +20,18 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-top: 50px;
-  background-color: #f9f9f9;
+  background-color: #EFEFE6;
+  font-family: Macondo Swash Caps;
 }
 
 .login-form .form-group {
   margin-bottom: 20px;
+  font-family: Macondo Swash Caps;
 }
 
 .login-form label {
   font-weight: bold;
+  font-family: Macondo Swash Caps;
 }
 
 .login-form input[type="text"],
@@ -55,10 +39,16 @@
   width: 100%;
   padding: 10px;
   font-size: 16px;
+  font-family: Macondo Swash Caps;
 }
 
 .login-form button {
   width: 100%;
   padding: 10px;
   font-size: 16px;
+  background-color: #4B0066;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: Macondo Swash Caps;
 }

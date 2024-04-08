@@ -1,12 +1,13 @@
 /* header.css */
 
 .header {
-    background-color: #333;
+    background-color: #4B0066;
     color: #fff;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 18px solid #2f0041;
 }
 
 .site-name {
@@ -14,16 +15,28 @@
     cursor: pointer;
 }
 
+.search-bar-container {
+    flex-grow: 1;
+    margin-left: 20px;
+    position: relative;
+    padding: 0 20px;
+}
+
 .search-bar input {
-    padding: 5px;
-    border-radius: 5px;
+    padding: 5px 55px 5px 22px;
+    border-radius: 25px;
     border: none;
     width: 100%;
 }
 
-.search-bar-container {
-    flex-grow: 1;
-    margin-left: 20px;
+.search-bar-img {
+    height: 75%;
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
 .login-text {
@@ -43,6 +56,12 @@
 .login-buttons-container {
     display: flex;
     flex-direction: row;
+}
+
+.login-buttons-container .btn {
+    border-width: 2px;
+    border-radius: 17px !important;
+    font-size: 1.2em;
 }
 
 @media only screen and (max-width: 600px) {

@@ -13,6 +13,10 @@
   background-repeat: no-repeat;
 }
 
+.site-name {
+  font-family: Macondo Swash Caps;
+}
+
 .login-container {
   max-width: 400px;
   margin: auto;

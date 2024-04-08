@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "../Header";
 import ProductList from "../ProductList";
+import "./homepage.css";
 
 const Homepage = () => {
   const [searchTerm, setSearchTerm] = useState("");

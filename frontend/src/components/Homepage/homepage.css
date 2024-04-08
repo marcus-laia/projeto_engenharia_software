@@ -1,0 +1,13 @@
+/* homepage.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Macondo+Swash+Caps&display=swap');
+
+.container-fluid {
+    padding: 0 !important;
+    border: none;
+    margin: none;
+    font-family:  'Macondo Swash Caps', cursive !important;
+    background-color: #EFEFE6;
+}
+
+

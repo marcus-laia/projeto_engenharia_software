@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import searchBarImage from "./lupa.png"
 import "./header.css";
 
 const Header = ({
@@ -25,21 +26,21 @@ const Header = ({
   };
 
   return (
-    <header className="header" style={{ backgroundColor: "#4B0066" }}>
+    <header className="header">
       <h1 className="site-name" onClick={() => navigate("/")}>
         TEPT
       </h1>
       {hasSearchBar && (
         <div className="search-bar-container">
-
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder={placeholderText}
-            onChange={handleChange}
-            />
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder={placeholderText}
+              onChange={handleChange}
+              />
+              <img className="search-bar-img" src={searchBarImage}/>
+          </div>
         </div>
-            </div>
       )}
       <div className="login-buttons-container">
       {isLoggedIn ? (

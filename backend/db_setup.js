@@ -11,7 +11,9 @@ const createUsersTableQuery = `
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) NOT NULL,
-        location VARCHAR(255) NOT NULL
+        location_id INT NOT NULL,
+
+        FOREIGN KEY (location_id) REFERENCES locations(id)
     )
 `;
 
@@ -25,8 +27,8 @@ const createProductsTableQuery = `
 
 const createCollectionsTableQuery = `
     CREATE TABLE IF NOT EXISTS collections (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
+        id INT NOT NULL,
+        name VARCHAR(255),
         user_id INT NOT NULL,
         product_id INT NOT NULL,
         quantity INT NOT NULL,
@@ -37,7 +39,25 @@ const createCollectionsTableQuery = `
     )
 `;
 
-// Run queries
+const createLocationsTableQuery = `
+    CREATE TABLE IF NOT EXISTS locations (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        country VARCHAR(255) NOT NULL,
+        state VARCHAR(255) NOT NULL,
+        city VARCHAR(255) NOT NULL,
+        postal_code VARCHAR(255) NOT NULL
+    )
+`;
+
+// Run queries to create the tables
+runQuery(connection, createLocationsTableQuery)
+    .then(() => {
+        console.log('Locations table created');
+    })
+    .catch((error) => {
+        console.log('Error creating locations table:', error);
+    });
+
 runQuery(connection, createUsersTableQuery)
     .then(() => {
         console.log('Users table created');

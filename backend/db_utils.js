@@ -1,11 +1,12 @@
 const mysql = require('mysql');
+const { promisify } = require('util');
 
 // Function to connect to the database
-function connectToDatabase() {
+const connectToDatabase = () => {
   // Create a connection
   const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'admin',
+    user: 'root',
     password: 'senha123pass',
     database: 'tept'
   });
@@ -23,19 +24,18 @@ function connectToDatabase() {
   return connection;
 }
 
-// Function to run a query
-function runQuery(connection, query) {
-  return new Promise((resolve, reject) => {
-    // Execute the query
-    connection.query(query, (error, results) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(results);
-      }
-    });
-  });
-}
+const runQuery = async (connection, query, params) => {
+  const queryAsync = promisify(connection.query).bind(connection);
+
+  try {
+    const results = await queryAsync(query, params);
+    return results;
+  }
+  catch (error) {
+    throw error;
+  }
+};
+
 
 // Export the functions
 module.exports = {

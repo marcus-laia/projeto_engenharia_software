@@ -6,6 +6,11 @@ Pre-requisites:
 - Install graphql npm install -g @apollo/client graphql
 - Install apollo client npm install -g @apollo/client
 - Install font awesome npm install -g @fortawesome/fontawesome-free
+- Install jest for unit testing npm install --save-dev jest
+   - also add the code below to package.json file
+   {"scripts": {
+    "test": "jest"
+   }}
 
 # Getting Started with Create React App
 

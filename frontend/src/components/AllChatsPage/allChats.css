@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Macondo+Swash+Caps&display=swap');
+
 .all-chats-container-all-chats {
-    padding: 20px;
+    padding: 20px 50px;
+    font-family:  'Macondo Swash Caps', cursive !important;
   }
   
   .chats-list-all-chats {
@@ -9,7 +12,7 @@
   .chat-row-all-chats {
     width: 100%;
     margin: 0 auto;
-    padding: 10px;
+    padding: 10px 30px;
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
@@ -17,6 +20,7 @@
     white-space: nowrap;
     margin-bottom: 10px;
     cursor: pointer;
+    background-color: #e2e2d4;
   }
   
   .user-name-all-chats {

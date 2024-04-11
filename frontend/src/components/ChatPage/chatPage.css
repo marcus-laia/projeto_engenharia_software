@@ -1,7 +1,6 @@
 .chat-page-container-chatPage {
     display: flex;
     flex-direction: column;
-    height: 100%;
   }
   
   .see-negotiation-btn-chatPage {

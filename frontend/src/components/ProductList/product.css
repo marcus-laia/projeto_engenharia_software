@@ -10,6 +10,12 @@
   margin-bottom: 20px;
   width: 250px;
   margin: 50px;
+  outline: 0px solid #00000000;
+  transition: outline 100ms ease 0s;
+}
+
+.product-card:hover {
+  outline: 4px solid #504d4d;
 }
 
 .product-image {

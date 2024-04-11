@@ -1,5 +1,7 @@
 .product-screen-container-negotiation {
     padding: 20px;
+    background-color: #62197c;
+    border-radius: 17px 0 0 17px;
 }
 
 .product-row-negotiation {
@@ -10,6 +12,10 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+}
+
+.row-header-negotiation h2 {
+    color: white;
 }
 
 .product-scroll-container-negotiation {

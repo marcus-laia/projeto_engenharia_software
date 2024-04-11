@@ -1,5 +1,20 @@
 /* header.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Macondo+Swash+Caps&display=swap');
+
+#root {
+    background-color: #EFEFE6;
+    height: 100vh;
+    font-family: 'Macondo Swash Caps', cursive !important;
+    font-size: 20px;
+    min-height: 100vh;
+    height: 100%;
+  }  
+
+html {
+    height: 100%;
+}
+
 .header {
     background-color: #4B0066;
     color: #fff;
@@ -95,6 +110,10 @@
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+}
+
+.dropdown-content a:last-child {
+    color: #eb0000;
 }
 
 .dropdown-content {

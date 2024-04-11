@@ -1,13 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Macondo+Swash+Caps&display=swap');
+
 .my-account-container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+    font-family:  'Macondo Swash Caps', cursive !important;
   }
   
   .user-info-myAccount {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 20px;
+    background-color: #e2e2d4;
   }
   
   .info-item-myAccount {

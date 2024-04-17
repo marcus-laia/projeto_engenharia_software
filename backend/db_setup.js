@@ -5,43 +5,52 @@ const { connectToDatabase, runQuery } = require('./db_utils');
 // Create a connection to the MySQL database
 const connection = connectToDatabase();
 
-// Create a dummy table
+// Create tables
+const createLoginTableQuery = `
+    CREATE TABLE IF NOT EXISTS login (
+        user_id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(255) UNIQUE,
+        password VARCHAR(255) NOT NULL
+    )
+`;
+
 const createUsersTableQuery = `
     CREATE TABLE IF NOT EXISTS users (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL,
-        location_id INT NOT NULL,
+        email VARCHAR(255),
+        location_id INT,
 
+        FOREIGN KEY (user_id) REFERENCES login(user_id),
         FOREIGN KEY (location_id) REFERENCES locations(id)
     )
 `;
 
 const createProductsTableQuery = `
     CREATE TABLE IF NOT EXISTS products (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        product_id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
-        image VARCHAR(255) NOT NULL
+        image VARCHAR(255) NOT NULL,
+        sku INT
     )
 `;
 
-const createCollectionsTableQuery = `
-    CREATE TABLE IF NOT EXISTS collections (
-        id INT NOT NULL,
-        name VARCHAR(255),
+const createUserProductsTableQuery = `
+    CREATE TABLE IF NOT EXISTS user_products (
+        user_product_id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT NOT NULL,
         product_id INT NOT NULL,
-        quantity INT NOT NULL,
+        collection VARCHAR(255),
+        text_description TEXT,
 
-        FOREIGN KEY (user_id) REFERENCES users(id),
-        FOREIGN KEY (product_id) REFERENCES products(id),
-        UNIQUE(id, user_id, product_id)
+        FOREIGN KEY (user_id) REFERENCES users(user_id),
+        FOREIGN KEY (product_id) REFERENCES products(product_id)
     )
 `;
 
 const createLocationsTableQuery = `
     CREATE TABLE IF NOT EXISTS locations (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        location_id INT AUTO_INCREMENT PRIMARY KEY,
         country VARCHAR(255) NOT NULL,
         state VARCHAR(255) NOT NULL,
         city VARCHAR(255) NOT NULL,
@@ -49,38 +58,81 @@ const createLocationsTableQuery = `
     )
 `;
 
+const createChatsTableQuery = `
+    CREATE TABLE IF NOT EXISTS chats (
+        chat_id INT AUTO_INCREMENT PRIMARY KEY,
+        user1_id INT NOT NULL,
+        user2_id INT NOT NULL,
+        last_message TEXT,
+
+        FOREIGN KEY (user1_id) REFERENCES users(user_id),
+        FOREIGN KEY (user2_id) REFERENCES users(user_id)
+    )
+`;
+
+const createMessagesTableQuery = `
+    CREATE TABLE IF NOT EXISTS messages (
+        chat_id INT NOT NULL,
+        from_user_id INT NOT NULL,
+        to_user_id INT NOT NULL,
+        message TEXT NOT NULL,
+        datetime TIMESTAMP NOT NULL,
+
+        FOREIGN KEY (chat_id) REFERENCES chats(chat_id),
+        FOREIGN KEY (from_user_id) REFERENCES users(user_id),
+        FOREIGN KEY (to_user_id) REFERENCES users(user_id)
+    )
+`;
+
+const createNegotiationsTableQuery = `
+    CREATE TABLE IF NOT EXISTS negotiations (
+        negotiation_id INT AUTO_INCREMENT PRIMARY KEY,
+        user1_id INT NOT NULL,
+        user2_id INT NOT NULL,
+        status VARCHAR(255) NOT NULL,
+
+        FOREIGN KEY (user1_id) REFERENCES users(user_id),
+        FOREIGN KEY (user2_id) REFERENCES users(user_id)
+    )
+`;
+
+const createNegotiationsProductsTableQuery = `
+    CREATE TABLE IF NOT EXISTS negotiations_products (
+        negotiation_id INT NOT NULL,
+        user_product_id INT NOT NULL,
+
+        FOREIGN KEY (negotiation_id) REFERENCES negotiations(negotiation_id),
+        FOREIGN KEY (user_product_id) REFERENCES user_products(user_product_id)
+    )
+`;
+
 // Run queries to create the tables
-runQuery(connection, createLocationsTableQuery)
-    .then(() => {
-        console.log('Locations table created');
-    })
-    .catch((error) => {
-        console.log('Error creating locations table:', error);
-    });
+await runQuery(connection, createLocationsTableQuery);
+console.log('Locations table created');
 
-runQuery(connection, createUsersTableQuery)
-    .then(() => {
-        console.log('Users table created');
-    })
-    .catch((error) => {
-        console.error('Error creating users table:', error);
-    });
+await runQuery(connection, createLoginTableQuery);
+console.log('Login table created');
 
-runQuery(connection, createProductsTableQuery)
-    .then(() => {
-        console.log('Products table created');
-    })
-    .catch((error) => {
-        console.error('Error creating products table:', error);
-    });
+await runQuery(connection, createUsersTableQuery);
+console.log('Users table created');
 
-runQuery(connection, createCollectionsTableQuery)
-    .then(() => {
-        console.log('Collections table created');
-    })
-    .catch((error) => {
-        console.error('Error creating collections table:', error);
-    });
+await runQuery(connection, createProductsTableQuery);
+console.log('Products table created');
+
+await runQuery(connection, createUserProductsTableQuery);
+console.log('UserProducts table created');
+
+await runQuery(connection, createChatsTableQuery);
+console.log('Chats table created');
+
+await runQuery(connection, createMessagesTableQuery);
+console.log('Messages table created');
+
+await runQuery(connection, createNegotiationsTableQuery);
+console.log('Negotiations table created');
+
+await runQuery(connection, createNegotiationsProductsTableQuery);
+console.log('NegotiationsProducts table created');
 
 // Close the database connection
 connection.end((err) => {

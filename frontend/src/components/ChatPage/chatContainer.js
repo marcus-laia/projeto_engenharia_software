@@ -1,7 +1,7 @@
 import React from 'react';
 import Chat from './chat';
 import { useQuery } from '@apollo/client';
-import { GET_CHAT } from '../../graphql/mutations/getChatMutation';
+import { GET_CHAT } from '../../graphql/mutations/getChatQuery';
 import './chatContainer.css';
 
 const ChatContainer = ({ currentUserId, otherUserId }) => {

@@ -12,9 +12,11 @@ const ProductList = ({ filter }) => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  console.log(data);
+
   return (
     <div className="product-list">
-      {data.products.map((product) => (
+      {data.getProducts.map((product) => (
         <Product
           id={product.id}
           name={product.name}

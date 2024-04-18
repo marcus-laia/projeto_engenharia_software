@@ -4,10 +4,10 @@ import { MockLink } from '@apollo/client/testing';
 import { LOGIN_MUTATION } from './graphql/mutations/loginMutation';
 import { REGISTER_MUTATION } from './graphql/mutations/registerMutation';
 import { GET_PRODUCTS } from './graphql/mutations/getProductsQuery';
-import { GET_MASTER_PRODUCTS } from './graphql/mutations/getMasterProductsMutation';
+import { GET_MASTER_PRODUCTS } from './graphql/mutations/getMasterProductsQuery';
 import { ADD_CARDS } from './graphql/mutations/addCardsMutation';
-import { GET_CHAT } from './graphql/mutations/getChatMutation';
-import { GET_ALL_CHATS } from './graphql/mutations/getAllChatsMutation';
+import { GET_CHAT } from './graphql/mutations/getChatQuery';
+import { GET_ALL_CHATS } from './graphql/mutations/getAllChatsQuery';
 import { SEND_MESSAGE_MUTATION } from './graphql/mutations/sendMessageMutation';
 import { GET_USER_INFO } from './graphql/mutations/getUserInfoQuery';
 import { UPDATE_USER_LOCATION } from './graphql/mutations/updateUserLocationMutation';
@@ -414,31 +414,31 @@ const mockLink = new MockLink([
 ]);
 
 
-const client = new ApolloClient({
-  link: mockLink.concat(createHttpLink({ uri: '/graphql' })),
-  cache: new InMemoryCache()
-});
+// const client = new ApolloClient({
+//   link: mockLink.concat(createHttpLink({ uri: '/graphql' })),
+//   cache: new InMemoryCache()
+// });
 
 // TO DO: adjust this when backend is up
 
-// let authLink = (_, { headers }) => {
-//   // Retrieve the JWT from local storage or cookies
-//   const token = localStorage.getItem('customer_token'); // Example: localStorage key 'jwt'
+let authLink = (_, { headers }) => {
+  // Retrieve the JWT from local storage or cookies
+  const token = localStorage.getItem('customer_token'); // Example: localStorage key 'jwt'
 
-//   return {
-//     headers: {
-//       ...headers,
-//       authorization: token ? `Bearer ${token}` : '', // Include the JWT in the authorization header
-//     }
-//   };
-// };
-// const httpLink = createHttpLink({
-//   uri: 'http://localhost:4000/graphql', // Our GraphQL server URL
-// });
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '', // Include the JWT in the authorization header
+    }
+  };
+};
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000/graphql', // Our GraphQL server URL
+});
 
-// const client = new ApolloClient({
-//   link: httpLink,
-//   cache: new InMemoryCache()
-// });
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache()
+});
 
 export default client;

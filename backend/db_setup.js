@@ -21,8 +21,7 @@ const createUsersTableQuery = `
         email VARCHAR(255),
         location_id INT,
 
-        FOREIGN KEY (user_id) REFERENCES login(user_id),
-        FOREIGN KEY (location_id) REFERENCES locations(id)
+        FOREIGN KEY (location_id) REFERENCES locations(location_id)
     )
 `;
 
@@ -106,39 +105,43 @@ const createNegotiationsProductsTableQuery = `
     )
 `;
 
-// Run queries to create the tables
-await runQuery(connection, createLocationsTableQuery);
-console.log('Locations table created');
+const createAllTables = async () => {
+    // Run queries to create the tables
+    await runQuery(connection, createLocationsTableQuery);
+    console.log('Locations table created');
 
-await runQuery(connection, createLoginTableQuery);
-console.log('Login table created');
+    await runQuery(connection, createLoginTableQuery);
+    console.log('Login table created');
 
-await runQuery(connection, createUsersTableQuery);
-console.log('Users table created');
+    await runQuery(connection, createUsersTableQuery);
+    console.log('Users table created');
 
-await runQuery(connection, createProductsTableQuery);
-console.log('Products table created');
+    await runQuery(connection, createProductsTableQuery);
+    console.log('Products table created');
 
-await runQuery(connection, createUserProductsTableQuery);
-console.log('UserProducts table created');
+    await runQuery(connection, createUserProductsTableQuery);
+    console.log('UserProducts table created');
 
-await runQuery(connection, createChatsTableQuery);
-console.log('Chats table created');
+    await runQuery(connection, createChatsTableQuery);
+    console.log('Chats table created');
 
-await runQuery(connection, createMessagesTableQuery);
-console.log('Messages table created');
+    await runQuery(connection, createMessagesTableQuery);
+    console.log('Messages table created');
 
-await runQuery(connection, createNegotiationsTableQuery);
-console.log('Negotiations table created');
+    await runQuery(connection, createNegotiationsTableQuery);
+    console.log('Negotiations table created');
 
-await runQuery(connection, createNegotiationsProductsTableQuery);
-console.log('NegotiationsProducts table created');
+    await runQuery(connection, createNegotiationsProductsTableQuery);
+    console.log('NegotiationsProducts table created');
 
-// Close the database connection
-connection.end((err) => {
-    if (err) {
-        console.error('Error closing the database connection:', err);
-        return;
-    }
-    console.log('Database connection closed.');
-});
+    // Close the database connection
+    connection.end((err) => {
+        if (err) {
+            console.error('Error closing the database connection:', err);
+            return;
+        }
+        console.log('Database connection closed.');
+    });
+};
+
+createAllTables();

@@ -1,7 +1,7 @@
 import React from 'react';
 import AllChats from './allChats';
 import { useQuery } from '@apollo/client';
-import { GET_ALL_CHATS } from '../../graphql/mutations/getAllChatsMutation';
+import { GET_ALL_CHATS } from '../../graphql/mutations/getAllChatsQuery';
 
 const AllChatsContainer = ( {currentUserId} ) => {
   const { loading, error, data } = useQuery(GET_ALL_CHATS, {

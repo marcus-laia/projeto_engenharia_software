@@ -1,7 +1,7 @@
 import React from 'react';
 import AddCards from './addCards';
 import { useQuery } from '@apollo/client';
-import { GET_MASTER_PRODUCTS } from '../../graphql/mutations/getMasterProductsMutation';
+import { GET_MASTER_PRODUCTS } from '../../graphql/mutations/getMasterProductsQuery';
 
 const AddCardsContainer = ( {filter} ) => {
   const { loading, error, data } = useQuery(GET_MASTER_PRODUCTS, {

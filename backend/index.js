@@ -1,4 +1,4 @@
-// const { ApolloServer } = require("apollo-server");
+e// const { ApolloServer } = require("apollo-server");
 // const { typeDefs } = require('./schema/type-defs.js');
 // const { resolvers } = require('./schema/resolvers.js');
 
@@ -8,13 +8,12 @@
 //     console.log(`API running at ${url}`);
 // });
 
-const { ApolloServer } = require("apollo-server");
+const { ApolloServer } = require("apollo-server-express");
+const express = require('express');
 const { typeDefs } = require('./schema/type-defs.js');
 const { resolvers } = require('./schema/resolvers.js');
-const express = require('express');
 
 const server = new ApolloServer({ typeDefs, resolvers });
-
 const app = express();
 
 // Enable CORS
@@ -30,6 +29,7 @@ app.use((req, res, next) => {
 
 server.applyMiddleware({ app });
 
-server.listen().then(({ url }) => {
-    console.log(`API running at ${url}`);
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`API running at http://localhost:${PORT}${server.graphqlPath}`);
 });

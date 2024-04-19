@@ -8,7 +8,7 @@ import Header from "../Header";
 import "./myAccount.css";
 
 const MyAccount = () => {
-  const { loading, error, data } = useQuery(GET_USER_INFO);
+  const { loading, error, data } = useQuery(GET_USER_INFO, { variables: { userId: Number(localStorage.getItem("userId")) }, });
   const [showModal, setShowModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -17,7 +17,7 @@ const MyAccount = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-  const { username, email, location } = data.userInfo;
+  const { username, email, location } = data.getUserInfo;
 
   const handleToggleModal = () => {
     setShowModal(!showModal);
@@ -25,7 +25,7 @@ const MyAccount = () => {
 
   const handleLocationFormSubmit = (newLocation) => {
     updateUserLocation({
-      variables: { userId: data.userInfo.id, location: newLocation }
+      variables: { userId: data.getUserInfo.id, location: newLocation }
     }).then((result) => {
       setSuccessMessage('Location updated successfully!');
       setTimeout(() => {

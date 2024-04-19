@@ -7,7 +7,7 @@ export const ADD_CARDS = gql`
       message
       userProductsList {
         id
-        userId
+        userID
         products {
           id
           name

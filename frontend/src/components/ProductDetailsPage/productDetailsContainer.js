@@ -5,7 +5,7 @@ import { GET_PRODUCT_DETAILS } from '../../graphql/mutations/getProductDetailsQu
 
 const ProductDetailsContainer = ( {productId} ) => {
   const { loading, error, data } = useQuery(GET_PRODUCT_DETAILS, {
-    variables: { productId },
+    variables: { productID: productId },
   });
 
   if (loading) return <p>Loading...</p>;
@@ -13,7 +13,7 @@ const ProductDetailsContainer = ( {productId} ) => {
 
   return (
     <div>
-      <ProductDetails product={data.getProduct} />
+      <ProductDetails product={data.getProductDetails} />
     </div>
   );
 };

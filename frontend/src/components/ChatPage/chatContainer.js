@@ -14,7 +14,7 @@ const ChatContainer = ({ currentUserId, otherUserId }) => {
 
   return (
     <div className="chat-container-chatContainer">
-      <Chat messages={data.messages} currentUserId={currentUserId} otherUserId={otherUserId} />
+      <Chat messages={data.getChat.data.messages} currentUserId={currentUserId} otherUserId={otherUserId} />
     </div>
   );
 };

@@ -31,7 +31,7 @@ const MyCards = ({ products }) => {
       await removeCards({
         variables: {
           productIds: selectedIds,
-          userId: 123 // TO DO: handle user id
+          userId: Number(localStorage.getItem("userId")) // TO DO: handle user id
         },
       });
       setNotification({ message: 'Cards removed successfully!', type: 'success' });

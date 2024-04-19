@@ -23,7 +23,7 @@ const NegotiationPage = ({ userId1Received, userId2Received }) => {
       <div className="negotiation-container-negotiationPage">
         <h2 className="negotiation-header-negotiationPage">Negotiation Details</h2>
         <div className="negotiation-content-negotiationPage">
-          <NegotiationContainer negotiationId={data.negotiationId} userId1={userId1} userId2={userId2} />
+          <NegotiationContainer negotiationId={data.negotiation.negotiationId} userId1={userId1} userId2={userId2} />
         </div>
       </div>
     </div>

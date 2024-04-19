@@ -3,9 +3,9 @@ import MyCards from './myCards';
 import { useQuery } from '@apollo/client';
 import { GET_USER_PRODUCTS } from '../../graphql/mutations/getUserProductsQuery';
 
-const MyCardsContainer = ( {filter} ) => {
+const MyCardsContainer = ( {userId, filter} ) => {
   const { loading, error, data } = useQuery(GET_USER_PRODUCTS, {
-    variables: { userId: 123, filter },
+    variables: { userId, filter },
   });
 
   if (loading) return <p>Loading...</p>;
@@ -13,7 +13,7 @@ const MyCardsContainer = ( {filter} ) => {
 
   return (
     <div>
-      <MyCards products={data.products} />
+      <MyCards products={data.getUserProducts} />
     </div>
   );
 };

@@ -13,7 +13,7 @@ const AllChatsContainer = ( {currentUserId} ) => {
 
   return (
     <div>
-      <AllChats chats={data.chats} currentUserId={currentUserId}/>
+      <AllChats chats={data.getAllChats.data.chats} currentUserId={currentUserId}/>
     </div>
   );
 };

@@ -25,6 +25,12 @@ const typeDefs = gql`
         products: [Product]
     }
 
+    type AddCardsResponse {
+        success: Boolean!
+        message: String
+        userProductsList: UserProductsList
+    }
+
     type Location {
         country: String!
         state: String!
@@ -47,9 +53,25 @@ const typeDefs = gql`
         lastMessage: String
     }
 
+    type AllChatsAux {
+        chats: [Chat]
+    }
+
+    type AllChatsResponse {
+        data: AllChatsAux
+    }
+
     type Message {
         fromUserId: ID!
         content: String!
+    }
+
+    type ChatResponseAux {
+        messages: [Message]
+    }
+
+    type ChatResponse {
+        data: ChatResponseAux
     }
 
     type LoginResponse {
@@ -77,6 +99,10 @@ const typeDefs = gql`
         token: String
     }
 
+    type negotiationResponse {
+        negotiationId: ID!
+    }
+
     input LocationInput {
         country: String
         state: String
@@ -86,22 +112,22 @@ const typeDefs = gql`
 
     type Query {
         getUserInfo(userId: ID!): User
-        getMasterProducts: [Product]
+        getMasterProducts(filter: String): [Product]
         getProducts(filter: String): [Product]
         getUserProducts(userId: ID!, filter: String): [Product]
         getProductDetails(productID: ID!): DetailedProduct
-        getAllChats(currentUserId: ID!): [Chat]
-        getChat(currentUserId: ID!, otherUserId: ID!): [Message]
-        getNegotiation(userId1: ID!, userId2: ID!): ID
+        getAllChats(currentUserId: ID!): AllChatsResponse
+        getChat(currentUserId: ID!, otherUserId: ID!): ChatResponse
+        negotiation(userId1: ID!, userId2: ID!): negotiationResponse
         getNegotiationProducts(negotiationId: ID!, userId: ID!): [Product]
     }
 
     type Mutation {
         register(username: String!, password: String!): DefaultResponse
         login(username: String!, password: String!): LoginResponse
-        addCards(userId: ID!, productIds: [ID!]!): UserProductsList
+        addCards(userId: ID!, productIds: [ID!]!): AddCardsResponse
         removeCards(userId: ID!, productIds: [ID!]!): RemoveCardsResponse
-        sendMessage(fromUserId: ID!, toUserId: ID!, content: String!): StatusResponse
+        sendMessage(text: String!, currentUserId: ID!, otherUserId: ID!): StatusResponse
         updateUserLocation(userId: ID!, location: LocationInput!): DefaultResponse
     }
 `;

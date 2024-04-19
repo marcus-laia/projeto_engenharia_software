@@ -16,7 +16,7 @@ const NegotiationContainer = ( {negotiationId, userId1, userId2} ) => {
 
   return (
     <div>
-      <Negotiation productsUser1={dataProductsUser1.products} productsUser2={dataProductsUser2.products}/>
+      <Negotiation productsUser1={dataProductsUser1.getNegotiationProducts} productsUser2={dataProductsUser2.getNegotiationProducts}/>
     </div>
   );
 };

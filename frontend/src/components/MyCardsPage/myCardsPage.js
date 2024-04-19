@@ -12,7 +12,7 @@ const MyCardsPage = () => {
   return (
     <div>
       <Header handleSearch={handleSearch} hasSearchBar={true} placeholderText={"Search cards to remove..."}/>
-      <MyCardsContainer filter={searchTerm} />
+      <MyCardsContainer userId={Number(localStorage.getItem("userId"))} filter={searchTerm} />
     </div>
   );
 };

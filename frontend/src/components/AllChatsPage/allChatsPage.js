@@ -3,7 +3,7 @@ import AllChatsContainer from './allChatsContainer';
 import Header from '../Header';
 
 const AllChatsPage = () => {
-  const currentUserId = 123; //TO DO: handle current user id
+  const currentUserId = Number(localStorage.getItem("userId")); //TO DO: handle current user id
   return (
     <div>
       <Header hasSearchBar={false} />

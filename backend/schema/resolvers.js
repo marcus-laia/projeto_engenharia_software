@@ -7,7 +7,7 @@ const connectToDatabase = () => {
   // Create a connection
   const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'backend',
+    user: 'root',
     password: 'senha123pass',
     database: 'tept_db'
   });
@@ -53,7 +53,7 @@ const resolvers = {
       connection.end();
 
       const userInfo = {
-        username: user.username,
+        username: user.name,
         email: user.email,
         id: user.user_id,
         location: {
@@ -69,7 +69,15 @@ const resolvers = {
 
     getMasterProducts: async (_, args) => {
       // all products in the database
-      const masterProductsQuery = `SELECT * FROM products`;
+      const masterProductsQuery = `
+        SELECT
+          product_id AS id,
+          name,
+          image,
+          sku
+        FROM 
+          products
+      `;
       const connection = connectToDatabase();
       const masterProducts = await runQuery(connection, masterProductsQuery);
       connection.end();
@@ -140,6 +148,7 @@ const resolvers = {
 
       const masterProductQuery = `
         SELECT
+          product_id,
           name,
           image,
           sku
@@ -154,7 +163,7 @@ const resolvers = {
 
       // ASSUMPTION: receive the user_product id and return the master_product id
       const DetailedProduct = {
-        id: masterProduct.id,
+        id: masterProduct.product_id,
         name: masterProduct.name,
         image: masterProduct.image,
         sku: masterProduct.sku,
@@ -167,7 +176,7 @@ const resolvers = {
     },
 
     getAllChats: async (_, args) => {
-      const user_id = args.CurrentUserId;
+      const user_id = args.currentUserId;
       // all chats in the database
       const chatsQuery = `
         (
@@ -179,7 +188,7 @@ const resolvers = {
           FROM
             chats
           WHERE
-            user_id_1 = ${user_id}
+            user1_id = ${user_id}
         )
         UNION ALL
         (
@@ -191,19 +200,25 @@ const resolvers = {
           FROM
             chats
           WHERE
-            user_id_2 = ${user_id} AND user_id_1 != ${user_id}
+            user2_id = ${user_id} AND user1_id != ${user_id}
         )
       `;
       // last condition avoid to return the same chat twice if the user is in both columns
       const connection = connectToDatabase();
       const chats = await runQuery(connection, chatsQuery);
       connection.end();
-      return chats;
+
+      const allChats = {
+        data: {
+          chats: chats
+        }
+      };
+      return allChats;
     },
 
     getChat: async (_, args) => {
-      const current_user_id = args.CurrentUserId;
-      const other_user_id = args.OtherUserId;
+      const current_user_id = args.currentUserId;
+      const other_user_id = args.otherUserId;
       // all messages in a specific chat
       const chatQuery = `
         SELECT
@@ -215,18 +230,27 @@ const resolvers = {
           from_user_id = ${current_user_id} AND to_user_id = ${other_user_id}
           OR
           from_user_id = ${other_user_id} AND to_user_id = ${current_user_id}
-        SORT BY
+        ORDER BY
           datetime ASC
       `;
       const connection = connectToDatabase();
       const chat = await runQuery(connection, chatQuery);
       connection.end();
-      return chat;
+
+      const chatResponse = {
+        data: {
+          messages: chat
+        }
+      };
+
+      return chatResponse;
     },
 
-    getNegotiation: async (_, args) => {
-      const user_id_1 = args.UserId1;
-      const user_id_2 = args.UserId2;
+    negotiation: async (_, args) => {
+      const user_id_1 = args.userId1;
+      const user_id_2 = args.userId2;
+      
+      const connection = connectToDatabase();
       // negotiation id between two users
       const negotiationQuery = `
         SELECT
@@ -234,19 +258,34 @@ const resolvers = {
         FROM
           negotiations
         WHERE
-          user_id_1 = ${user_id_1} AND user_id_2 = ${user_id_2}
+          user1_id = ${user_id_1} AND user2_id = ${user_id_2}
           OR
-          user_id_1 = ${user_id_2} AND user_id_2 = ${user_id_1}
+          user1_id = ${user_id_2} AND user2_id = ${user_id_1}
       `;
-      const connection = connectToDatabase();
       const negotiation = (await runQuery(connection, negotiationQuery))[0];
+
+      let negotiationId;
+      if (!negotiation) {
+        // create a new negotiation
+        const createNegotiationQuery = `
+          INSERT INTO negotiations (user1_id, user2_id, status)
+          VALUES (${user_id_1}, ${user_id_2}, 'active')
+        `;
+        await runQuery(connection, createNegotiationQuery);
+        // get the negotiation id
+        negotiationId = (await runQuery(connection, negotiationQuery))[0].negotiationId;
+      } else {
+        negotiationId = negotiation.negotiationId;
+      }
+
       connection.end();
-      return negotiation;
+  
+      return { negotiationId };
     },
 
     getNegotiationProducts: async (_, args) => {
-      const negotiation_id = args.NegotiationId;
-      const user_id = args.UserId;
+      const negotiation_id = args.negotiationId;
+      const user_id = args.userId;
       // all products in a specific negotiation
       const negotiationProductsQuery = `
         SELECT
@@ -394,38 +433,52 @@ const resolvers = {
       
       const connection = connectToDatabase();
 
-      // iterate over productIds
-      for (let i = 0; i < productIds.length; i++) {
-        const productId = productIds[i];
-        // add card to user_products table
-        const addCardQuery = `
-          INSERT INTO user_products (user_id, product_id)
-          VALUES (${userId}, ${productId})
+      try {
+        // iterate over productIds
+        for (let i = 0; i < productIds.length; i++) {
+          const productId = productIds[i];
+          // add card to user_products table
+          const addCardQuery = `
+            INSERT INTO user_products (user_id, product_id)
+            VALUES (${userId}, ${productId})
+          `;
+          await runQuery(connection, addCardQuery);
+        }
+
+        // get user_product_list
+        const userProductsQuery = `
+          SELECT
+            up.user_product_id AS id,
+            mp.name,
+            mp.image,
+            mp.sku
+          FROM user_products up
+          INNER JOIN products mp
+          ON up.product_id = mp.product_id
+          WHERE up.user_id = ${userId}
         `;
-        await runQuery(connection, addCardQuery);
+        const userProducts = await runQuery(connection, userProductsQuery);
+
+        connection.end();
+
+        return {
+          success: true,
+          message: 'Cards added successfully',
+          userProductsList: {
+            id: 1,
+            userID: userId,
+            products: userProducts
+          }
+        };
+      } catch (error) {
+        connection.end();
+        console.log('Error adding cards:', error);
+        return {
+          success: false,
+          message: "Error adding cards",
+          products: []
+        };
       }
-
-      // get user_product_list
-      const userProductsQuery = `
-        SELECT
-          up.user_product_id AS id,
-          mp.name,
-          mp.image,
-          mp.sku
-        FROM user_products up
-        INNER JOIN products mp
-        ON up.product_id = mp.product_id
-        WHERE up.user_id = ${userId}
-      `;
-      const userProducts = await runQuery(connection, userProductsQuery);
-
-      connection.end();
-
-      return {
-        id: 1,
-        userID: userId,
-        products: userProducts
-      };
     },
 
     removeCards: async (_, args) => {
@@ -438,7 +491,7 @@ const resolvers = {
         // remove card to user_products table
         const removeCardQuery = `
           DELETE FROM user_products
-          WHERE user_id = ${userId} AND product_id IN (${productIds.join(',')})
+          WHERE user_id = ${userId} AND user_product_id IN (${productIds.join(',')})
         `;
         await runQuery(connection, removeCardQuery);
 
@@ -475,9 +528,9 @@ const resolvers = {
     },
 
     sendMessage: async (_, args) => {
-      const fromUserId = args.fromUserId;
-      const toUserId = args.toUserId;
-      const message = args.content;
+      const message = args.text;
+      const fromUserId = args.currentUserId;
+      const toUserId = args.otherUserId;
 
       const connection = connectToDatabase();
 
@@ -490,16 +543,16 @@ const resolvers = {
           FROM
             chats
           WHERE
-            user_id_1 = ${fromUserId} AND user_id_2 = ${toUserId}
+            user1_id = ${fromUserId} AND user2_id = ${toUserId}
             OR
-            user_id_1 = ${toUserId} AND user_id_2 = ${fromUserId}
+            user1_id = ${toUserId} AND user2_id = ${fromUserId}
         `;
         const chat = (await runQuery(connection, chatQuery))[0];
 
         // if there is no chat, create a new one
         if (!chat) {
           const createChatQuery = `
-            INSERT INTO chats (user_id_1, user_id_2)
+            INSERT INTO chats (user1_id, user2_id)
             VALUES (${fromUserId}, ${toUserId})
           `;
           await runQuery(connection, createChatQuery);

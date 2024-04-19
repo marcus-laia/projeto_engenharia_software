@@ -13,7 +13,7 @@ const AddCardsContainer = ( {filter} ) => {
 
   return (
     <div>
-      <AddCards products={data.products} />
+      <AddCards products={data.getMasterProducts} />
     </div>
   );
 };

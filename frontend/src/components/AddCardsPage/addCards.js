@@ -31,7 +31,7 @@ const AddCards = ({ products }) => {
       await addCards({
         variables: {
           productIds: selectedIds,
-          userId: 123 // TO DO: handle user id
+          userId: Number(localStorage.getItem("userId")) // TO DO: handle user id
         },
       });
       setNotification({ message: 'Cards added successfully!', type: 'success' });

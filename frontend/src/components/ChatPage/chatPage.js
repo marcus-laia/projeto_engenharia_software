@@ -6,7 +6,7 @@ import NegotiationPage from '../NegotiationPage/negotiationPage';
 import './chatPage.css';
 
 const ChatPage = () => {
-  const currentUserId = Number(localStorage.getItem("userId")); // TO DO: Handle current user id
+  const currentUserId = Number(localStorage.getItem("userId"));
   const { otherUserId: otherUserIdString } = useParams();
   const otherUserId = parseInt(otherUserIdString);
 

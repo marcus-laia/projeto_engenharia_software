@@ -9,6 +9,8 @@ import MyAccount from './components/MyAccount/myAccount';
 import MyCardsPage from './components/MyCardsPage/myCardsPage';
 import NegotiationPage from './components/NegotiationPage/negotiationPage';
 import ProductDetailsPage from './components/ProductDetailsPage';
+import AddToNegotiationPage from './components/AddToNegotiationPage';
+import RemoveFromNegotiationPage from './components/RemoveFromNegotiationPage';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path="/my-cards" element={<MyCardsPage />} />
         <Route path="/negotiation/:userId1/:userId2" element={<NegotiationPage />} />
         <Route path="/product-details/:productId" element={<ProductDetailsPage />} />
+        <Route path="/add-cards-to-negotiation/:negotiationId/:userId" element={<AddToNegotiationPage />} />
+        <Route path="/remove-cards-from-negotiation/:negotiationId/:userId" element={<RemoveFromNegotiationPage />} />
       </Routes>
     </Router>
   );

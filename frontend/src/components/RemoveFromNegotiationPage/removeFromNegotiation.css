@@ -1,0 +1,90 @@
+.removeCardsFromNegotiation-container {
+  max-width: 800px;
+  padding: 35px;
+  margin: auto;
+}
+
+.removeCardsFromNegotiation-container h1:first-child {
+  margin-bottom: 35px;
+}
+
+.product-image-removeCardsFromNegotiation {
+  height: 120px;
+  margin-right: 15px;
+  transition: width 0.3s, height 0.3s; 
+}
+
+.product-image-removeCardsFromNegotiation:hover {
+  height: 390px;
+}
+
+.product-list-removeCardsFromNegotiation {
+  display: unset;
+  margin-top: 20px;
+}
+
+.product-row-removeCardsFromNegotiation {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  background-color: #e2e2d4;
+  border-radius: 25px;
+  position: relative;
+}
+
+.product-details-removeCardsFromNegotiation {
+  display: flex;
+  align-items: center;
+}
+
+product-row-removeCardsFromNegotiation input[type="checkbox"] {
+  position: absolute;
+  right: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+  input[type="checkbox"] {
+    position: relative;
+    left: 30%;
+  }
+}
+
+.notification-remove-cards {
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.notification-remove-cards.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.notification-remove-cards.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.remove-cards-button-removeCardsFromNegotiation {
+  background-color: #007bff; 
+  color: #fff; 
+  border: none;
+  border-radius: 50px; 
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px; 
+  right: 20px; 
+  z-index: 1000; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  transition: background-color 0.3s ease;
+  width: 320px; 
+  height: 60px; 
+}
+
+.remove-cards-button-removeCardsFromNegotiation:hover {
+  background-color: #0056b3;
+}
+

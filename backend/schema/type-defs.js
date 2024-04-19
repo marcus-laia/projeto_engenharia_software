@@ -32,10 +32,10 @@ const typeDefs = gql`
     }
 
     type Location {
-        country: String!
-        state: String!
-        city: String!
-        postalCode: String!
+        country: String
+        state: String
+        city: String
+        postalCode: String
     }
 
     type User {

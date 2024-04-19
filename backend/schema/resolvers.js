@@ -47,8 +47,18 @@ const resolvers = {
       const userQuery = `SELECT * FROM users WHERE user_id = ${id}`;
       const user = (await runQuery(connection, userQuery))[0];
 
+      let location;
       const locationQuery = `SELECT * FROM locations WHERE location_id = ${user.location_id}`;
-      const location = (await runQuery(connection, locationQuery))[0];
+      location = (await runQuery(connection, locationQuery))[0];
+
+      if (!location) {
+        location = {
+          country: 'Unknown',
+          state: 'Unknown',
+          city: 'Unknown',
+          postal_code: 'Unknown'
+        };
+      }
 
       connection.end();
 

@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_CARDS_TO_NEGOTIATION } from "../../graphql/mutations/addCardsToNegotiation";
 import "./addToNegotiation.css";
 
-const AddToNegotiation = ({ products }) => {
+const AddToNegotiation = ({ products, negotiationId }) => {
   const [addCardsToNegotiation] = useMutation(ADD_CARDS_TO_NEGOTIATION);
   const [selectedProducts, setSelectedProducts] = useState(
     products.reduce((acc, product) => {
@@ -31,7 +31,8 @@ const AddToNegotiation = ({ products }) => {
       await addCardsToNegotiation({
         variables: {
           productIds: selectedIds,
-          userId: Number(localStorage.getItem("userId")) // TO DO: handle user id
+          userId: Number(localStorage.getItem("userId")),
+          negotiationId
         },
       });
       setNotification({ message: 'Cards added successfully!', type: 'success' });

@@ -18,7 +18,7 @@ const RemoveFromNegotiationContainer = ( {userId, negotiationId, filter} ) => {
 
   return (
     <div>
-      <RemoveFromNegotiation products={data.getUserProducts.filter(product => dataProductsUser.getNegotiationProducts.some(p => p.id === product.id))}/>
+      <RemoveFromNegotiation negotiationId={negotiationId} products={data.getUserProducts.filter(product => dataProductsUser.getNegotiationProducts.some(p => p.id === product.id))}/>
     </div>
   );
 };

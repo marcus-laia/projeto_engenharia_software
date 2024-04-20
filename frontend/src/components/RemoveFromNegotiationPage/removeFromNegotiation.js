@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { REMOVE_CARDS_FROM_NEGOTIATION } from "../../graphql/mutations/removeCardsFromNegotiation";
 import "./removeFromNegotiation.css";
 
-const RemoveFromNegotiation = ({ products }) => {
+const RemoveFromNegotiation = ({ products, negotiationId }) => {
   const [removeCardsFromNegotiation] = useMutation(REMOVE_CARDS_FROM_NEGOTIATION);
   const [selectedProducts, setSelectedProducts] = useState(
     products.reduce((acc, product) => {
@@ -31,7 +31,8 @@ const RemoveFromNegotiation = ({ products }) => {
       await removeCardsFromNegotiation({
         variables: {
           productIds: selectedIds,
-          userId: Number(localStorage.getItem("userId")) // TO DO: handle user id
+          userId: Number(localStorage.getItem("userId")),
+          negotiationId
         },
       });
       setNotification({ message: 'Cards removed successfully!', type: 'success' });

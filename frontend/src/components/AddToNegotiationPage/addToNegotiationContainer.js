@@ -18,7 +18,7 @@ const AddToNegotiationContainer = ( {userId, negotiationId, filter} ) => {
 
   return (
     <div>
-      <AddToNegotiation products={data.getUserProducts.filter(product => !dataProductsUser.getNegotiationProducts.some(p => p.id === product.id))}/>
+      <AddToNegotiation negotiationId={negotiationId} products={data.getUserProducts.filter(product => !dataProductsUser.getNegotiationProducts.some(p => p.id === product.id))}/>
     </div>
   );
 };

@@ -20,7 +20,7 @@ const startServer = async () => {
     typeDefs,
     resolvers,
     cors: {
-      origin: 'http://localhost:3000', // Allow requests from the frontend
+      origin: '*', // Allow requests from any origin during development
       credentials: true, // Allow sending cookies from frontend
     },
     // Disable HTTPS

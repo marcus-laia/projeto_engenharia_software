@@ -8,8 +8,8 @@
 //     console.log(`API running at ${url}`);
 // });
 
-const { ApolloServer } = require("apollo-server");
 const express = require('express');
+const { ApolloServer } = require("apollo-server-express");
 const { typeDefs } = require('./schema/type-defs.js');
 const { resolvers } = require('./schema/resolvers.js');
 
@@ -28,6 +28,8 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app, cors: false });
 
-server.listen().then(({ url }) => {
-    console.log(`API running at ${url}`);
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });

@@ -50,6 +50,7 @@ const typeDefs = gql`
         chatId: ID!
         currentUserName: String!
         otherUserName: String!
+        otherUserId: ID!
         lastMessage: String
     }
 
@@ -129,6 +130,8 @@ const typeDefs = gql`
         removeCards(userId: ID!, productIds: [ID!]!): RemoveCardsResponse
         sendMessage(text: String!, currentUserId: ID!, otherUserId: ID!): StatusResponse
         updateUserLocation(userId: ID!, location: LocationInput!): DefaultResponse
+        addCardsToNegotiation(userId: ID!, productIds: [ID!]!, negotiationId: ID!): AddCardsResponse
+        removeCardsFromNegotiation(userId: ID!, productIds: [ID!]!, negotiationId: ID!): RemoveCardsResponse
     }
 `;
 

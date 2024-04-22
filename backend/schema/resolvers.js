@@ -191,24 +191,34 @@ const resolvers = {
       const chatsQuery = `
         (
           SELECT
-            chat_id AS chatId,
-            user1_id AS currentUserName,
-            user2_id AS otherUserName,
-            last_message AS lastMessage
+            c.chat_id AS chatId,
+            c.user1_id AS currentUserName,
+            u.name AS otherUserName,
+            c.user2_id AS otherUserId,
+            c.last_message AS lastMessage
           FROM
-            chats
+            chats c
+          LEFT JOIN
+            users u
+          ON
+            c.user2_id = u.user_id            
           WHERE
             user1_id = ${user_id}
         )
         UNION ALL
         (
           SELECT
-            chat_id AS chatId,
-            user2_id AS currentUserName,
-            user1_id AS otherUserName,
-            last_message AS lastMessage
+            c.chat_id AS chatId,
+            c.user2_id AS currentUserName,
+            u.name AS otherUserName,
+            c.user1_id AS otherUserId,
+            c.last_message AS lastMessage
           FROM
-            chats
+            chats c
+          LEFT JOIN
+              users u
+            ON
+              c.user1_id = u.user_id   
           WHERE
             user2_id = ${user_id} AND user1_id != ${user_id}
         )
@@ -435,7 +445,7 @@ const resolvers = {
         location: location
       };
     },
-    
+
     addCards: async (_, args) => {
       // get userId (int) and productIds (int array) from args
       const userId = args.userId;
@@ -653,6 +663,111 @@ const resolvers = {
         return {
           success: false,
           message: 'Error updating location'
+        };
+      }
+    },
+    
+    addCardsToNegotiation: async (_, args) => {
+      const userId = args.userId;
+      const negotiationId = args.negotiationId;
+      const productIds = args.productIds;
+      
+      const connection = connectToDatabase();
+
+      try {
+        // iterate over productIds
+        for (let i = 0; i < productIds.length; i++) {
+          const productId = productIds[i];
+          // add card to negotiations_products table
+          const addCardToNegotiationQuery = `
+            INSERT INTO negotiations_products (negotiation_id, user_product_id)
+            VALUES (${negotiationId}, ${productId})
+          `;
+          await runQuery(connection, addCardToNegotiationQuery);
+        }
+
+        // get user_product_list
+        const userProductsQuery = `
+          SELECT
+            up.product_id AS id,
+            mp.name,
+            mp.image,
+            mp.sku
+          FROM user_products up
+          INNER JOIN products mp
+          ON up.product_id = mp.product_id
+          WHERE up.user_product_id IN (${productIds.join(',')})
+        `;
+        const userProducts = await runQuery(connection, userProductsQuery);
+
+        connection.end();
+
+        return {
+          success: true,
+          message: 'Cards added successfully',
+          userProductsList: {
+            id: 1,
+            userID: userId,
+            products: userProducts
+          }
+        };
+      } catch (error) {
+        connection.end();
+        console.log('Error adding cards:', error);
+        return {
+          success: false,
+          message: "Error adding cards",
+          products: []
+        };
+      }
+    },
+
+    removeCardsFromNegotiation: async (_, args) => {
+      const userId = args.userId;
+      const negotiationId = args.negotiationId;
+      const productIds = args.productIds;
+
+      const connection = connectToDatabase();
+      try {
+        // remove card to user_products table
+        const removeCardFromNegotiationQuery = `
+          DELETE FROM negotiations_products
+          WHERE negotiation_id = ${negotiationId} AND user_product_id IN (${productIds.join(',')})
+        `;
+        await runQuery(connection, removeCardFromNegotiationQuery);
+
+        // get user_product_list
+        const userProductsQuery = `
+          SELECT
+            up.product_id AS id,
+            mp.name,
+            mp.image,
+            mp.sku
+          FROM user_products up
+          INNER JOIN products mp
+          ON up.product_id = mp.product_id
+          WHERE up.user_id = ${userId}
+        `;
+        const userProducts = await runQuery(connection, userProductsQuery);
+
+        connection.end();
+
+        return {
+          success: true,
+          message: 'Cards removed successfully',
+          userProductsList: {
+            id: 1,
+            userID: userId,
+            products: userProducts
+          }
+        };
+      } catch (error) {
+        connection.end();
+        console.log('Error removing cards:', error);
+        return {
+          success: false,
+          message: "Error removing cards",
+          products: []
         };
       }
     }

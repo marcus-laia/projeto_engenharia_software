@@ -16,7 +16,7 @@ const Negotiation = ({ productsUser1, productsUser2, userId1, userId2, negotiati
         // const negotiationIdMock = 789;
         // const userId1Mock = 132456;
         // navigate(`/remove-cards-from-negotiation/${negotiationIdMock}/${userId1Mock}`);
-        navigate(`/add-cards-to-negotiation/${nId}/${uId}`);
+        navigate(`/remove-cards-from-negotiation/${nId}/${uId}`);
     }
 
     return (
@@ -24,24 +24,24 @@ const Negotiation = ({ productsUser1, productsUser2, userId1, userId2, negotiati
             <div className="product-row-negotiation">
                 <div className="row-header-negotiation">
                     <h2>Usuario 1 oferece:</h2>
-                    <button className="edit-button-negotiation" onClick={() => handleAddCardsToNegotiation(userId1, negotiationId)}>Add cards</button>
-                    <button className="edit-button-negotiation" onClick={() => handleRemoveCardsFromNegotiation(userId1, negotiationId)}>Remove cards</button>
+                    <button className="edit-button-negotiation" onClick={() => handleAddCardsToNegotiation(negotiationId, userId1)}>Add cards</button>
+                    <button className="edit-button-negotiation" onClick={() => handleRemoveCardsFromNegotiation(negotiationId, userId1)}>Remove cards</button>
                 </div>
                 <div className="product-scroll-container-negotiation">
                 {productsUser1.map((product) => (
-                    <Product name={product.name} image={product.image} sku={product.sku} />
+                    <Product id={product.id} name={product.name} image={product.image} sku={product.sku} />
                 ))}
                 </div>
             </div>
             <div className="product-row-negotiation">
                 <div className="row-header-negotiation">
                     <h2>Usuario 2 oferece:</h2>
-                    <button className="edit-button-negotiation" onClick={() => handleAddCardsToNegotiation(userId2, negotiationId)}>Add cards</button>
-                    <button className="edit-button-negotiation" onClick={() => handleRemoveCardsFromNegotiation(userId2, negotiationId)}>Remove cards</button>
+                    <button className="edit-button-negotiation" onClick={() => handleAddCardsToNegotiation(negotiationId, userId2)}>Add cards</button>
+                    <button className="edit-button-negotiation" onClick={() => handleRemoveCardsFromNegotiation(negotiationId, userId2)}>Remove cards</button>
                 </div>
                 <div className="product-scroll-container-negotiation">
                     {productsUser2.map((product) => (
-                        <Product name={product.name} image={product.image} sku={product.sku} />
+                        <Product id={product.id} name={product.name} image={product.image} sku={product.sku} />
                     ))}
                 </div>
             </div>

@@ -5,6 +5,7 @@ export const GET_ALL_CHATS = gql`
     getAllChats(currentUserId: $currentUserId) {
        data {
          chats {
+          otherUserId
           otherUserName
           lastMessage
          }

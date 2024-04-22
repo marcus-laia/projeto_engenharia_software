@@ -22,8 +22,7 @@ const startServer = async () => {
     introspection: true,
     playground: true,
     cors: {
-      origin: '*', // Allow requests from any origin during development
-      credentials: true, // Allow sending cookies from frontend
+      origin: '*' // Allow requests from any origin during development
     }
     // Disable HTTPS
     // https: false

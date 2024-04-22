@@ -19,12 +19,14 @@ const startServer = async () => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    introspection: true,
+    playground: true,
     cors: {
       origin: '*', // Allow requests from any origin during development
       credentials: true, // Allow sending cookies from frontend
     },
     // Disable HTTPS
-    https: false,
+    https: false
   });
 
   await server.start();

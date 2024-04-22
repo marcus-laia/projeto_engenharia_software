@@ -24,9 +24,9 @@ const startServer = async () => {
     cors: {
       origin: '*', // Allow requests from any origin during development
       credentials: true, // Allow sending cookies from frontend
-    },
+    }
     // Disable HTTPS
-    https: false
+    // https: false
   });
 
   await server.start();

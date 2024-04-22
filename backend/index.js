@@ -9,8 +9,11 @@
 // });
 
 const { ApolloServer } = require("apollo-server");
+const express = require('express');
 const { typeDefs } = require('./schema/type-defs.js');
 const { resolvers } = require('./schema/resolvers.js');
+
+const app = express();
 
 const server = new ApolloServer({
   typeDefs,

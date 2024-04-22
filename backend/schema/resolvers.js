@@ -7,7 +7,7 @@ const connectToDatabase = () => {
   // Create a connection
   const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
+    user: 'backend',
     password: 'senha123pass',
     database: 'tept_db'
   });

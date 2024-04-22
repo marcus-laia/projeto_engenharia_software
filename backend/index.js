@@ -13,23 +13,29 @@ const { ApolloServer } = require("apollo-server-express");
 const { typeDefs } = require('./schema/type-defs.js');
 const { resolvers } = require('./schema/resolvers.js');
 
-const app = express();
+const startServer = async () => {
+  const app = express();
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  cors: {
-    origin: 'http://localhost:3000', // Allow requests from the frontend
-    credentials: true, // Allow sending cookies from frontend
-  },
-  // Disable HTTPS
-  https: false,
-});
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    cors: {
+      origin: 'http://localhost:3000', // Allow requests from the frontend
+      credentials: true, // Allow sending cookies from frontend
+    },
+    // Disable HTTPS
+    https: false,
+  });
 
-server.applyMiddleware({ app, cors: false });
+  await server.start();
 
-const PORT = process.env.PORT || 4000;
+  server.applyMiddleware({ app, cors: false });
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+  const PORT = process.env.PORT || 4000;
+
+  app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+  });
+};
+
+startServer();

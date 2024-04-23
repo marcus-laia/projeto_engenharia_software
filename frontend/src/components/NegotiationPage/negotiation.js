@@ -23,7 +23,7 @@ const Negotiation = ({ productsUser1, productsUser2, userId1, userId2, negotiati
         <div className="product-screen-container-negotiation">
             <div className="product-row-negotiation">
                 <div className="row-header-negotiation">
-                    <h2>Usuario 1 oferece:</h2>
+                    <h2>Você oferece:</h2>
                     <button className="edit-button-negotiation" onClick={() => handleAddCardsToNegotiation(negotiationId, userId1)}>Add cards</button>
                     <button className="edit-button-negotiation" onClick={() => handleRemoveCardsFromNegotiation(negotiationId, userId1)}>Remove cards</button>
                 </div>
@@ -35,7 +35,7 @@ const Negotiation = ({ productsUser1, productsUser2, userId1, userId2, negotiati
             </div>
             <div className="product-row-negotiation">
                 <div className="row-header-negotiation">
-                    <h2>Usuario 2 oferece:</h2>
+                    <h2>O outro usuário oferece:</h2>
                     <button className="edit-button-negotiation" onClick={() => handleAddCardsToNegotiation(negotiationId, userId2)}>Add cards</button>
                     <button className="edit-button-negotiation" onClick={() => handleRemoveCardsFromNegotiation(negotiationId, userId2)}>Remove cards</button>
                 </div>

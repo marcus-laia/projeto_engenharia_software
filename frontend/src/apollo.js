@@ -503,7 +503,7 @@ let authLink = (_, { headers }) => {
   };
 };
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql', // Our GraphQL server URL
+  uri: 'http://18.229.139.164:4000/graphql', // Our GraphQL server URL
 });
 
 const client = new ApolloClient({

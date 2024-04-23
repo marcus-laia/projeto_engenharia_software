@@ -16,8 +16,10 @@ const Chat = ({ messages, currentUserId, otherUserId }) => {
       if (status === "success") {
         console.log("Message sent successfully");
         setMessageText("");
+        window.location.reload();
       } else {
         console.error("Failed to send message");
+        window.location.reload();
       }
     } catch (error) {
       console.error("Error sending message:", error);
@@ -30,7 +32,7 @@ const Chat = ({ messages, currentUserId, otherUserId }) => {
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`message-chat ${message.from === currentUserId ? 'sender-chat' : 'receiver-chat'}`}
+            className={`message-chat ${message.fromUserId == currentUserId ? 'sender-chat' : 'receiver-chat'}`}
           >
             <p>{message.content}</p>
           </div>
